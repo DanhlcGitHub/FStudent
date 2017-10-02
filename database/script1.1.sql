@@ -3,6 +3,7 @@ DROP DATABASE StudentData
 CREATE DATABASE StudentData;
 use [StudentData]
 
+CREATE TABLE SectionSubTemplate (ID int IDENTITY NOT NULL, SectionID nvarchar(20) NOT NULL, MarkTitle nvarchar(50) NULL, Percentage decimal(19, 3) NULL, IsCurrent bit NULL, PRIMARY KEY (ID));
 CREATE TABLE Admin (AdminID nvarchar(50) NOT NULL, Password nvarchar(50) NOT NULL,AdminName nvarchar(50), PRIMARY KEY (AdminID));
 CREATE TABLE PrequisiteManager (PrequisiteID int IDENTITY NOT NULL, SubjectRepresented nvarchar(20) NOT NULL, PrequisiteSubject nvarchar(20) NOT NULL, PRIMARY KEY (PrequisiteID));
 CREATE TABLE Professor (ProfessorCode nvarchar(20) NOT NULL, ProfessorName nvarchar(255) NOT NULL, DepartmentID int NOT NULL, Title nvarchar(50) NULL, Salary decimal(19, 3) NULL, Phone nvarchar(15) NOT NULL, Address nvarchar(255) NOT NULL, Password nvarchar(50) NOT NULL, PRIMARY KEY (ProfessorCode));
@@ -12,10 +13,10 @@ CREATE TABLE SectionSchedule (SectionScheduleID int IDENTITY NOT NULL, SectionID
 CREATE TABLE Student (StudentID nvarchar(20) NOT NULL, StudentName nvarchar(50) NOT NULL, Major nvarchar(10) NOT NULL, Address nvarchar(255) NOT NULL, Sex int NOT NULL, BirthDay datetime NOT NULL, Country nvarchar(255) NOT NULL, Email nvarchar(255) NOT NULL, Phone nvarchar(15) NOT NULL, Password nvarchar(50) NOT NULL, PRIMARY KEY (StudentID));
 CREATE TABLE StudentTranscript (TranscriptID int IDENTITY NOT NULL, StudentCode nvarchar(20) NOT NULL, SectionID nvarchar(20) NOT NULL, AverageGrade float(10) NULL,LearningStatus nvarchar(20) NOT NULL, PRIMARY KEY (TranscriptID));
 CREATE TABLE Subject (SubjectCode nvarchar(20) NOT NULL, SubjectName nvarchar(50) NULL, Credit int NULL, PRIMARY KEY (SubjectCode));
-CREATE TABLE SubjectTeamplate (ID int IDENTITY NOT NULL, SubjectID nvarchar(20) NOT NULL, MarkTitle nvarchar(50) NULL, Percentage decimal(19, 3) NULL, IsCurrent bit NULL, PRIMARY KEY (ID));
+CREATE TABLE SubjectTemplate (ID int IDENTITY NOT NULL, SubjectID nvarchar(20) NOT NULL, MarkTitle nvarchar(50) NULL, Percentage decimal(19, 3) NULL, IsCurrent bit NULL, PRIMARY KEY (ID));
 CREATE TABLE TranscriptAttendaceEntry (EntryID int IDENTITY NOT NULL, TranscriptID int NOT NULL, AttendanceStatus int NULL, SectionScheduleID int NOT NULL, PRIMARY KEY (EntryID));
-CREATE TABLE TranscriptMarkEntry (EntryID int IDENTITY NOT NULL, TranscriptID int NOT NULL, SubjectTeamplateID int null, Grade decimal(19, 3) NULL, PRIMARY KEY (EntryID));
-ALTER TABLE SubjectTeamplate ADD CONSTRAINT FKSubjectTea437859 FOREIGN KEY (SubjectID) REFERENCES Subject (SubjectCode);
+CREATE TABLE TranscriptMarkEntry (EntryID int IDENTITY NOT NULL, TranscriptID int NOT NULL, SectionTemplateID int null, Grade decimal(19, 3) NULL, PRIMARY KEY (EntryID));
+ALTER TABLE SubjectTemplate ADD CONSTRAINT FKSubjectTea437859 FOREIGN KEY (SubjectID) REFERENCES Subject (SubjectCode);
 ALTER TABLE TranscriptMarkEntry ADD CONSTRAINT FKTranscript687421 FOREIGN KEY (TranscriptID) REFERENCES StudentTranscript (TranscriptID);
 ALTER TABLE TranscriptAttendaceEntry ADD CONSTRAINT FKTranscript584403 FOREIGN KEY (TranscriptID) REFERENCES StudentTranscript (TranscriptID);
 ALTER TABLE StudentTranscript ADD CONSTRAINT FKStudentTra94815 FOREIGN KEY (StudentCode) REFERENCES Student (StudentID);
@@ -27,7 +28,9 @@ ALTER TABLE PrequisiteManager ADD CONSTRAINT FKPrequisite888716 FOREIGN KEY (Sub
 ALTER TABLE PrequisiteManager ADD CONSTRAINT FKPrequisite187664 FOREIGN KEY (PrequisiteSubject) REFERENCES Subject (SubjectCode);
 ALTER TABLE Section ADD CONSTRAINT FKSection411369 FOREIGN KEY (SemesterBelong) REFERENCES Schedule (SemesterID);
 ALTER TABLE Section ADD CONSTRAINT FKSection411370 FOREIGN KEY (RepresentedSubject) REFERENCES Subject (SubjectCode);
-ALTER TABLE TranscriptMarkEntry ADD CONSTRAINT FKTranscript687423 FOREIGN KEY (TranscriptID) REFERENCES SubjectTeamplate (ID);
+ALTER TABLE SectionSubTemplate ADD CONSTRAINT FKSectionSubTemplate687423 FOREIGN KEY (SectionID) REFERENCES Section (SectionNo);
+ALTER TABLE TranscriptMarkEntry ADD CONSTRAINT FKTranscript6874222 FOREIGN KEY (SectionTemplateID) REFERENCES SectionSubTemplate (ID);
+
 
 
 
@@ -139,62 +142,62 @@ VALUES (N'SEC00003',25,'2017/9/15','2017/12/15',N'PRO10002',N'ISC301',6);
 INSERT INTO Section (SectionNo,SeatingCapacity , StartDate,EndDate ,ProfessorCode ,RepresentedSubject,SemesterBelong)
 VALUES (N'SEC00004',25,'2017/9/15','2017/12/15',N'PRO10001',N'PRJ321',6);
 
-/*  8. SubjectTeamplate */
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+/*  8. SubjectTemplate */
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRO192','Quiz',0.3);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRO192','Assignment',0.3);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRO192','Final exam',0.4);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRJ321','Quiz',0.2);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRJ321','Practical',0.2);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRJ321','Assignment',0.2);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRJ321','Final exam',0.4);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRJ311','Quiz',0.3);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRJ311','Assignment',0.3);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRJ311','Final exam',0.4);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'ISC301','Quiz',0.3);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'ISC301','Assignment',0.3);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'ISC301','Final exam',0.4);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRM391','Quiz',0.3);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRM391','Assignment',0.3);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'PRM391','Final exam',0.4);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'ACC101','Quiz',0.3);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'ACC101','Assignment',0.3);
 
-INSERT INTO SubjectTeamplate (SubjectID,MarkTitle,Percentage)
+INSERT INTO SubjectTemplate (SubjectID,MarkTitle,Percentage)
 VALUES (N'ACC101','Final exam',0.4);
 
  /*  9. SectionSchedule */
@@ -223,36 +226,27 @@ INSERT INTO SectionSchedule (SectionID,[Date],Slot,Duration,Room)
 VALUES (N'SEC00001','2017/9/18',2,90,N'P209');
 
 /* 10. StudentTranscript */
-INSERT INTO StudentTranscript (StudentCode,SectionID)
-VALUES (N'SE61769','SEC00001');
+INSERT INTO StudentTranscript (StudentCode,SectionID,LearningStatus)
+VALUES (N'SE61769','SEC00001','Learning');
 
-INSERT INTO StudentTranscript (StudentCode,SectionID)
-VALUES (N'SE61770','SEC00001');
+INSERT INTO StudentTranscript (StudentCode,SectionID,LearningStatus)
+VALUES (N'SE61770','SEC00001','Learning');
 
-INSERT INTO StudentTranscript (StudentCode,SectionID)
-VALUES (N'SE61771','SEC00001');
+INSERT INTO StudentTranscript (StudentCode,SectionID,LearningStatus)
+VALUES (N'SE61771','SEC00001','Learning');
 
-INSERT INTO StudentTranscript (StudentCode,SectionID)
-VALUES (N'SE61772','SEC00001');
+INSERT INTO StudentTranscript (StudentCode,SectionID,LearningStatus)
+VALUES (N'SE61772','SEC00001','Learning');
 
-INSERT INTO StudentTranscript (StudentCode,SectionID)
-VALUES (N'SE61769','SEC00002');
+INSERT INTO StudentTranscript (StudentCode,SectionID,LearningStatus)
+VALUES (N'SE61769','SEC00002','Learning');
 
-INSERT INTO StudentTranscript (StudentCode,SectionID)
-VALUES (N'SE61770','SEC00002');
+INSERT INTO StudentTranscript (StudentCode,SectionID,LearningStatus)
+VALUES (N'SE61770','SEC00002','Learning');
 
-INSERT INTO StudentTranscript (StudentCode,SectionID)
-VALUES (N'SE61771','SEC00002');
+INSERT INTO StudentTranscript (StudentCode,SectionID,LearningStatus)
+VALUES (N'SE61771','SEC00002','Learning');
  
-/* Transcript Mark Entry */
-
-/* Transcript Attendance Entry */
-
-ALTER TABLE SubjectTeamplate
-ADD Percentage decimal(19,3)
-
-ALTER TABLE SubjectTeamplate
-DROP COLUMN  Percentage
 
  
 
