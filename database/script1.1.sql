@@ -3,18 +3,18 @@ DROP DATABASE StudentData
 CREATE DATABASE StudentData;
 use [StudentData]
 
-CREATE TABLE Admin (AdminID nvarchar(50) NOT NULL, Password nvarchar(50) NOT NULL, PRIMARY KEY (AdminID));
+CREATE TABLE Admin (AdminID nvarchar(50) NOT NULL, Password nvarchar(50) NOT NULL,AdminName nvarchar(50), PRIMARY KEY (AdminID));
 CREATE TABLE PrequisiteManager (PrequisiteID int IDENTITY NOT NULL, SubjectRepresented nvarchar(20) NOT NULL, PrequisiteSubject nvarchar(20) NOT NULL, PRIMARY KEY (PrequisiteID));
-CREATE TABLE Professor (ProfessorCode nvarchar(20) NOT NULL, ProfessorName nvarchar(255) NOT NULL, DepartmentID int NOT NULL, Title nvarchar(50) NULL, Salary decimal(19, 0) NULL, Phone nvarchar(15) NOT NULL, Address nvarchar(255) NOT NULL, Password nvarchar(50) NOT NULL, PRIMARY KEY (ProfessorCode));
+CREATE TABLE Professor (ProfessorCode nvarchar(20) NOT NULL, ProfessorName nvarchar(255) NOT NULL, DepartmentID int NOT NULL, Title nvarchar(50) NULL, Salary decimal(19, 3) NULL, Phone nvarchar(15) NOT NULL, Address nvarchar(255) NOT NULL, Password nvarchar(50) NOT NULL, PRIMARY KEY (ProfessorCode));
 CREATE TABLE Schedule (SemesterID int IDENTITY NOT NULL, StartDate datetime NOT NULL, EndDate datetime NOT NULL, SemesterName nvarchar(50) NULL, PRIMARY KEY (SemesterID));
 CREATE TABLE Section (SectionNo nvarchar(20) NOT NULL, SeatingCapacity int NOT NULL, StartDate datetime NULL, EndDate datetime NULL, ProfessorCode nvarchar(20) NOT NULL, RepresentedSubject nvarchar(20) NOT NULL, SemesterBelong int NOT NULL, PRIMARY KEY (SectionNo));
 CREATE TABLE SectionSchedule (SectionScheduleID int IDENTITY NOT NULL, SectionID nvarchar(20) NOT NULL, [Date] datetime NULL, Slot int NULL, Duration int NULL, Room nvarchar(20) NULL, PRIMARY KEY (SectionScheduleID));
 CREATE TABLE Student (StudentID nvarchar(20) NOT NULL, StudentName nvarchar(50) NOT NULL, Major nvarchar(10) NOT NULL, Address nvarchar(255) NOT NULL, Sex int NOT NULL, BirthDay datetime NOT NULL, Country nvarchar(255) NOT NULL, Email nvarchar(255) NOT NULL, Phone nvarchar(15) NOT NULL, Password nvarchar(50) NOT NULL, PRIMARY KEY (StudentID));
-CREATE TABLE StudentTranscript (TranscriptID int IDENTITY NOT NULL, StudentCode nvarchar(20) NOT NULL, SectionID nvarchar(20) NOT NULL, AverageGrade float(10) NULL, PRIMARY KEY (TranscriptID));
+CREATE TABLE StudentTranscript (TranscriptID int IDENTITY NOT NULL, StudentCode nvarchar(20) NOT NULL, SectionID nvarchar(20) NOT NULL, AverageGrade float(10) NULL,LearningStatus nvarchar(20) NOT NULL, PRIMARY KEY (TranscriptID));
 CREATE TABLE Subject (SubjectCode nvarchar(20) NOT NULL, SubjectName nvarchar(50) NULL, Credit int NULL, PRIMARY KEY (SubjectCode));
-CREATE TABLE SubjectTeamplate (ID int IDENTITY NOT NULL, SubjectID nvarchar(20) NOT NULL, MarkTitle nvarchar(50) NULL, Percentage decimal(19, 0) NULL, PRIMARY KEY (ID));
+CREATE TABLE SubjectTeamplate (ID int IDENTITY NOT NULL, SubjectID nvarchar(20) NOT NULL, MarkTitle nvarchar(50) NULL, Percentage decimal(19, 3) NULL, IsCurrent bit NULL, PRIMARY KEY (ID));
 CREATE TABLE TranscriptAttendaceEntry (EntryID int IDENTITY NOT NULL, TranscriptID int NOT NULL, AttendanceStatus int NULL, SectionScheduleID int NOT NULL, PRIMARY KEY (EntryID));
-CREATE TABLE TranscriptMarkEntry (EntryID int IDENTITY NOT NULL, TranscriptID int NOT NULL, MarkTitle nvarchar(50) NULL, Percentage decimal(19, 0) NULL, Grade decimal(19, 0) NULL, PRIMARY KEY (EntryID));
+CREATE TABLE TranscriptMarkEntry (EntryID int IDENTITY NOT NULL, TranscriptID int NOT NULL, SubjectTeamplateID int null, Grade decimal(19, 3) NULL, PRIMARY KEY (EntryID));
 ALTER TABLE SubjectTeamplate ADD CONSTRAINT FKSubjectTea437859 FOREIGN KEY (SubjectID) REFERENCES Subject (SubjectCode);
 ALTER TABLE TranscriptMarkEntry ADD CONSTRAINT FKTranscript687421 FOREIGN KEY (TranscriptID) REFERENCES StudentTranscript (TranscriptID);
 ALTER TABLE TranscriptAttendaceEntry ADD CONSTRAINT FKTranscript584403 FOREIGN KEY (TranscriptID) REFERENCES StudentTranscript (TranscriptID);
@@ -26,7 +26,8 @@ ALTER TABLE TranscriptAttendaceEntry ADD CONSTRAINT FKTranscript458878 FOREIGN K
 ALTER TABLE PrequisiteManager ADD CONSTRAINT FKPrequisite888716 FOREIGN KEY (SubjectRepresented) REFERENCES Subject (SubjectCode);
 ALTER TABLE PrequisiteManager ADD CONSTRAINT FKPrequisite187664 FOREIGN KEY (PrequisiteSubject) REFERENCES Subject (SubjectCode);
 ALTER TABLE Section ADD CONSTRAINT FKSection411369 FOREIGN KEY (SemesterBelong) REFERENCES Schedule (SemesterID);
-
+ALTER TABLE Section ADD CONSTRAINT FKSection411370 FOREIGN KEY (RepresentedSubject) REFERENCES Subject (SubjectCode);
+ALTER TABLE TranscriptMarkEntry ADD CONSTRAINT FKTranscript687423 FOREIGN KEY (TranscriptID) REFERENCES SubjectTeamplate (ID);
 
 
 
@@ -246,6 +247,13 @@ VALUES (N'SE61771','SEC00002');
 /* Transcript Mark Entry */
 
 /* Transcript Attendance Entry */
+
+ALTER TABLE SubjectTeamplate
+ADD Percentage decimal(19,3)
+
+ALTER TABLE SubjectTeamplate
+DROP COLUMN  Percentage
+
  
 
 
