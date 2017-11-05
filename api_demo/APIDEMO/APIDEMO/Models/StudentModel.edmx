@@ -1,0 +1,957 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="studentdataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PrequisiteManager">
+          <Key>
+            <PropertyRef Name="PrequisiteID" />
+          </Key>
+          <Property Name="PrequisiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectRepresented" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PrequisiteSubject" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Professor">
+          <Key>
+            <PropertyRef Name="ProfessorCode" />
+          </Key>
+          <Property Name="ProfessorCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProfessorName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salary" Type="decimal" Precision="19" Scale="3" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="SemesterID" />
+          </Key>
+          <Property Name="SemesterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="SemesterName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionNo" />
+          </Key>
+          <Property Name="SectionNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SeatingCapacity" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="ProfessorCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RepresentedSubject" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SemesterBelong" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SectionSchedule">
+          <Key>
+            <PropertyRef Name="SectionScheduleID" />
+          </Key>
+          <Property Name="SectionScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Slot" Type="int" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Room" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SectionSubTemplate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MarkTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Percentage" Type="decimal" Precision="19" Scale="3" />
+          <Property Name="IsCurrent" Type="bit" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Major" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Sex" Type="int" Nullable="false" />
+          <Property Name="BirthDay" Type="datetime" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentTranscript">
+          <Key>
+            <PropertyRef Name="TranscriptID" />
+          </Key>
+          <Property Name="TranscriptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SectionID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AverageGrade" Type="real" />
+          <Property Name="LearningStatus" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="SubjectCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SubjectName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Credit" Type="int" />
+        </EntityType>
+        <EntityType Name="SubjectTemplate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MarkTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Percentage" Type="decimal" Precision="19" Scale="3" />
+          <Property Name="IsCurrent" Type="bit" />
+        </EntityType>
+        <EntityType Name="TranscriptAttendaceEntry">
+          <Key>
+            <PropertyRef Name="EntryID" />
+          </Key>
+          <Property Name="EntryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TranscriptID" Type="int" Nullable="false" />
+          <Property Name="AttendanceStatus" Type="int" />
+          <Property Name="SectionScheduleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TranscriptMarkEntry">
+          <Key>
+            <PropertyRef Name="EntryID" />
+          </Key>
+          <Property Name="EntryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TranscriptID" Type="int" Nullable="false" />
+          <Property Name="SectionTemplateID" Type="int" />
+          <Property Name="Grade" Type="decimal" Precision="19" Scale="3" />
+        </EntityType>
+        <Association Name="FKPrequisite187664">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="PrequisiteManager" Type="Self.PrequisiteManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="PrequisiteManager">
+              <PropertyRef Name="PrequisiteSubject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPrequisite888716">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="PrequisiteManager" Type="Self.PrequisiteManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="PrequisiteManager">
+              <PropertyRef Name="SubjectRepresented" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSection411369">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="SemesterID" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="SemesterBelong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSection411370">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="RepresentedSubject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSection711879">
+          <End Role="Professor" Type="Self.Professor" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="ProfessorCode" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="ProfessorCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSectionSch330560">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="SectionSchedule" Type="Self.SectionSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionNo" />
+            </Principal>
+            <Dependent Role="SectionSchedule">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSectionSubTemplate687423">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="SectionSubTemplate" Type="Self.SectionSubTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionNo" />
+            </Principal>
+            <Dependent Role="SectionSubTemplate">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKStudentTra257209">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="StudentTranscript" Type="Self.StudentTranscript" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionNo" />
+            </Principal>
+            <Dependent Role="StudentTranscript">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKStudentTra94815">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentTranscript" Type="Self.StudentTranscript" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentTranscript">
+              <PropertyRef Name="StudentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSubjectTea437859">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="SubjectTemplate" Type="Self.SubjectTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="SubjectTemplate">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTranscript458878">
+          <End Role="SectionSchedule" Type="Self.SectionSchedule" Multiplicity="1" />
+          <End Role="TranscriptAttendaceEntry" Type="Self.TranscriptAttendaceEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SectionSchedule">
+              <PropertyRef Name="SectionScheduleID" />
+            </Principal>
+            <Dependent Role="TranscriptAttendaceEntry">
+              <PropertyRef Name="SectionScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTranscript584403">
+          <End Role="StudentTranscript" Type="Self.StudentTranscript" Multiplicity="1" />
+          <End Role="TranscriptAttendaceEntry" Type="Self.TranscriptAttendaceEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTranscript">
+              <PropertyRef Name="TranscriptID" />
+            </Principal>
+            <Dependent Role="TranscriptAttendaceEntry">
+              <PropertyRef Name="TranscriptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTranscript687421">
+          <End Role="StudentTranscript" Type="Self.StudentTranscript" Multiplicity="1" />
+          <End Role="TranscriptMarkEntry" Type="Self.TranscriptMarkEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTranscript">
+              <PropertyRef Name="TranscriptID" />
+            </Principal>
+            <Dependent Role="TranscriptMarkEntry">
+              <PropertyRef Name="TranscriptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTranscript6874222">
+          <End Role="SectionSubTemplate" Type="Self.SectionSubTemplate" Multiplicity="0..1" />
+          <End Role="TranscriptMarkEntry" Type="Self.TranscriptMarkEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SectionSubTemplate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TranscriptMarkEntry">
+              <PropertyRef Name="SectionTemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="studentdataModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrequisiteManager" EntityType="Self.PrequisiteManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SectionSchedule" EntityType="Self.SectionSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SectionSubTemplate" EntityType="Self.SectionSubTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentTranscript" EntityType="Self.StudentTranscript" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubjectTemplate" EntityType="Self.SubjectTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TranscriptAttendaceEntry" EntityType="Self.TranscriptAttendaceEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TranscriptMarkEntry" EntityType="Self.TranscriptMarkEntry" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FKPrequisite187664" Association="Self.FKPrequisite187664">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="PrequisiteManager" EntitySet="PrequisiteManager" />
+          </AssociationSet>
+          <AssociationSet Name="FKPrequisite888716" Association="Self.FKPrequisite888716">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="PrequisiteManager" EntitySet="PrequisiteManager" />
+          </AssociationSet>
+          <AssociationSet Name="FKSection411369" Association="Self.FKSection411369">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="FKSection411370" Association="Self.FKSection411370">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="FKSection711879" Association="Self.FKSection711879">
+            <End Role="Professor" EntitySet="Professor" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="FKSectionSch330560" Association="Self.FKSectionSch330560">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="SectionSchedule" EntitySet="SectionSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FKSectionSubTemplate687423" Association="Self.FKSectionSubTemplate687423">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="SectionSubTemplate" EntitySet="SectionSubTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FKStudentTra257209" Association="Self.FKStudentTra257209">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="StudentTranscript" EntitySet="StudentTranscript" />
+          </AssociationSet>
+          <AssociationSet Name="FKStudentTra94815" Association="Self.FKStudentTra94815">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentTranscript" EntitySet="StudentTranscript" />
+          </AssociationSet>
+          <AssociationSet Name="FKSubjectTea437859" Association="Self.FKSubjectTea437859">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="SubjectTemplate" EntitySet="SubjectTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FKTranscript458878" Association="Self.FKTranscript458878">
+            <End Role="SectionSchedule" EntitySet="SectionSchedule" />
+            <End Role="TranscriptAttendaceEntry" EntitySet="TranscriptAttendaceEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FKTranscript584403" Association="Self.FKTranscript584403">
+            <End Role="StudentTranscript" EntitySet="StudentTranscript" />
+            <End Role="TranscriptAttendaceEntry" EntitySet="TranscriptAttendaceEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FKTranscript687421" Association="Self.FKTranscript687421">
+            <End Role="StudentTranscript" EntitySet="StudentTranscript" />
+            <End Role="TranscriptMarkEntry" EntitySet="TranscriptMarkEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FKTranscript6874222" Association="Self.FKTranscript6874222">
+            <End Role="SectionSubTemplate" EntitySet="SectionSubTemplate" />
+            <End Role="TranscriptMarkEntry" EntitySet="TranscriptMarkEntry" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="studentdataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PrequisiteManager">
+          <Key>
+            <PropertyRef Name="PrequisiteID" />
+          </Key>
+          <Property Name="PrequisiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectRepresented" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrequisiteSubject" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Subject" Relationship="Self.FKPrequisite187664" FromRole="PrequisiteManager" ToRole="Subject" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FKPrequisite888716" FromRole="PrequisiteManager" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Professor">
+          <Key>
+            <PropertyRef Name="ProfessorCode" />
+          </Key>
+          <Property Name="ProfessorCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfessorName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="3" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sections" Relationship="Self.FKSection711879" FromRole="Professor" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="SemesterID" />
+          </Key>
+          <Property Name="SemesterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SemesterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sections" Relationship="Self.FKSection411369" FromRole="Schedule" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionNo" />
+          </Key>
+          <Property Name="SectionNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SeatingCapacity" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="ProfessorCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RepresentedSubject" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SemesterBelong" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Professor" Relationship="Self.FKSection711879" FromRole="Section" ToRole="Professor" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FKSection411369" FromRole="Section" ToRole="Schedule" />
+          <NavigationProperty Name="Subject" Relationship="Self.FKSection411370" FromRole="Section" ToRole="Subject" />
+          <NavigationProperty Name="SectionSchedules" Relationship="Self.FKSectionSch330560" FromRole="Section" ToRole="SectionSchedule" />
+          <NavigationProperty Name="SectionSubTemplates" Relationship="Self.FKSectionSubTemplate687423" FromRole="Section" ToRole="SectionSubTemplate" />
+          <NavigationProperty Name="StudentTranscripts" Relationship="Self.FKStudentTra257209" FromRole="Section" ToRole="StudentTranscript" />
+        </EntityType>
+        <EntityType Name="SectionSchedule">
+          <Key>
+            <PropertyRef Name="SectionScheduleID" />
+          </Key>
+          <Property Name="SectionScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Slot" Type="Int32" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Room" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Section" Relationship="Self.FKSectionSch330560" FromRole="SectionSchedule" ToRole="Section" />
+          <NavigationProperty Name="TranscriptAttendaceEntries" Relationship="Self.FKTranscript458878" FromRole="SectionSchedule" ToRole="TranscriptAttendaceEntry" />
+        </EntityType>
+        <EntityType Name="SectionSubTemplate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MarkTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Percentage" Type="Decimal" Precision="19" Scale="3" />
+          <Property Name="IsCurrent" Type="Boolean" />
+          <NavigationProperty Name="Section" Relationship="Self.FKSectionSubTemplate687423" FromRole="SectionSubTemplate" ToRole="Section" />
+          <NavigationProperty Name="TranscriptMarkEntries" Relationship="Self.FKTranscript6874222" FromRole="SectionSubTemplate" ToRole="TranscriptMarkEntry" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Major" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="Int32" Nullable="false" />
+          <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="StudentTranscripts" Relationship="Self.FKStudentTra94815" FromRole="Student" ToRole="StudentTranscript" />
+        </EntityType>
+        <EntityType Name="StudentTranscript">
+          <Key>
+            <PropertyRef Name="TranscriptID" />
+          </Key>
+          <Property Name="TranscriptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SectionID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AverageGrade" Type="Single" />
+          <Property Name="LearningStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Section" Relationship="Self.FKStudentTra257209" FromRole="StudentTranscript" ToRole="Section" />
+          <NavigationProperty Name="Student" Relationship="Self.FKStudentTra94815" FromRole="StudentTranscript" ToRole="Student" />
+          <NavigationProperty Name="TranscriptAttendaceEntries" Relationship="Self.FKTranscript584403" FromRole="StudentTranscript" ToRole="TranscriptAttendaceEntry" />
+          <NavigationProperty Name="TranscriptMarkEntries" Relationship="Self.FKTranscript687421" FromRole="StudentTranscript" ToRole="TranscriptMarkEntry" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="SubjectCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Credit" Type="Int32" />
+          <NavigationProperty Name="PrequisiteManagers" Relationship="Self.FKPrequisite187664" FromRole="Subject" ToRole="PrequisiteManager" />
+          <NavigationProperty Name="PrequisiteManagers1" Relationship="Self.FKPrequisite888716" FromRole="Subject" ToRole="PrequisiteManager" />
+          <NavigationProperty Name="Sections" Relationship="Self.FKSection411370" FromRole="Subject" ToRole="Section" />
+          <NavigationProperty Name="SubjectTemplates" Relationship="Self.FKSubjectTea437859" FromRole="Subject" ToRole="SubjectTemplate" />
+        </EntityType>
+        <EntityType Name="SubjectTemplate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MarkTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Percentage" Type="Decimal" Precision="19" Scale="3" />
+          <Property Name="IsCurrent" Type="Boolean" />
+          <NavigationProperty Name="Subject" Relationship="Self.FKSubjectTea437859" FromRole="SubjectTemplate" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="TranscriptAttendaceEntry">
+          <Key>
+            <PropertyRef Name="EntryID" />
+          </Key>
+          <Property Name="EntryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TranscriptID" Type="Int32" Nullable="false" />
+          <Property Name="AttendanceStatus" Type="Int32" />
+          <Property Name="SectionScheduleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SectionSchedule" Relationship="Self.FKTranscript458878" FromRole="TranscriptAttendaceEntry" ToRole="SectionSchedule" />
+          <NavigationProperty Name="StudentTranscript" Relationship="Self.FKTranscript584403" FromRole="TranscriptAttendaceEntry" ToRole="StudentTranscript" />
+        </EntityType>
+        <EntityType Name="TranscriptMarkEntry">
+          <Key>
+            <PropertyRef Name="EntryID" />
+          </Key>
+          <Property Name="EntryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TranscriptID" Type="Int32" Nullable="false" />
+          <Property Name="SectionTemplateID" Type="Int32" />
+          <Property Name="Grade" Type="Decimal" Precision="19" Scale="3" />
+          <NavigationProperty Name="SectionSubTemplate" Relationship="Self.FKTranscript6874222" FromRole="TranscriptMarkEntry" ToRole="SectionSubTemplate" />
+          <NavigationProperty Name="StudentTranscript" Relationship="Self.FKTranscript687421" FromRole="TranscriptMarkEntry" ToRole="StudentTranscript" />
+        </EntityType>
+        <Association Name="FKPrequisite187664">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="PrequisiteManager" Type="Self.PrequisiteManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="PrequisiteManager">
+              <PropertyRef Name="PrequisiteSubject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPrequisite888716">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="PrequisiteManager" Type="Self.PrequisiteManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="PrequisiteManager">
+              <PropertyRef Name="SubjectRepresented" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSection711879">
+          <End Role="Professor" Type="Self.Professor" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="ProfessorCode" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="ProfessorCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSection411369">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="SemesterID" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="SemesterBelong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSection411370">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="RepresentedSubject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSectionSch330560">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="SectionSchedule" Type="Self.SectionSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionNo" />
+            </Principal>
+            <Dependent Role="SectionSchedule">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSectionSubTemplate687423">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="SectionSubTemplate" Type="Self.SectionSubTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionNo" />
+            </Principal>
+            <Dependent Role="SectionSubTemplate">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKStudentTra257209">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="StudentTranscript" Type="Self.StudentTranscript" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionNo" />
+            </Principal>
+            <Dependent Role="StudentTranscript">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTranscript458878">
+          <End Role="SectionSchedule" Type="Self.SectionSchedule" Multiplicity="1" />
+          <End Role="TranscriptAttendaceEntry" Type="Self.TranscriptAttendaceEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SectionSchedule">
+              <PropertyRef Name="SectionScheduleID" />
+            </Principal>
+            <Dependent Role="TranscriptAttendaceEntry">
+              <PropertyRef Name="SectionScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTranscript6874222">
+          <End Role="SectionSubTemplate" Type="Self.SectionSubTemplate" Multiplicity="0..1" />
+          <End Role="TranscriptMarkEntry" Type="Self.TranscriptMarkEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SectionSubTemplate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TranscriptMarkEntry">
+              <PropertyRef Name="SectionTemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKStudentTra94815">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentTranscript" Type="Self.StudentTranscript" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentTranscript">
+              <PropertyRef Name="StudentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTranscript584403">
+          <End Role="StudentTranscript" Type="Self.StudentTranscript" Multiplicity="1" />
+          <End Role="TranscriptAttendaceEntry" Type="Self.TranscriptAttendaceEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTranscript">
+              <PropertyRef Name="TranscriptID" />
+            </Principal>
+            <Dependent Role="TranscriptAttendaceEntry">
+              <PropertyRef Name="TranscriptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTranscript687421">
+          <End Role="StudentTranscript" Type="Self.StudentTranscript" Multiplicity="1" />
+          <End Role="TranscriptMarkEntry" Type="Self.TranscriptMarkEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTranscript">
+              <PropertyRef Name="TranscriptID" />
+            </Principal>
+            <Dependent Role="TranscriptMarkEntry">
+              <PropertyRef Name="TranscriptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSubjectTea437859">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="SubjectTemplate" Type="Self.SubjectTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="SubjectTemplate">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="studentdataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="PrequisiteManagers" EntityType="Self.PrequisiteManager" />
+          <EntitySet Name="Professors" EntityType="Self.Professor" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+          <EntitySet Name="Sections" EntityType="Self.Section" />
+          <EntitySet Name="SectionSchedules" EntityType="Self.SectionSchedule" />
+          <EntitySet Name="SectionSubTemplates" EntityType="Self.SectionSubTemplate" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="StudentTranscripts" EntityType="Self.StudentTranscript" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="SubjectTemplates" EntityType="Self.SubjectTemplate" />
+          <EntitySet Name="TranscriptAttendaceEntries" EntityType="Self.TranscriptAttendaceEntry" />
+          <EntitySet Name="TranscriptMarkEntries" EntityType="Self.TranscriptMarkEntry" />
+          <AssociationSet Name="FKPrequisite187664" Association="Self.FKPrequisite187664">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="PrequisiteManager" EntitySet="PrequisiteManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FKPrequisite888716" Association="Self.FKPrequisite888716">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="PrequisiteManager" EntitySet="PrequisiteManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FKSection711879" Association="Self.FKSection711879">
+            <End Role="Professor" EntitySet="Professors" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="FKSection411369" Association="Self.FKSection411369">
+            <End Role="Schedule" EntitySet="Schedules" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="FKSection411370" Association="Self.FKSection411370">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="FKSectionSch330560" Association="Self.FKSectionSch330560">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="SectionSchedule" EntitySet="SectionSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FKSectionSubTemplate687423" Association="Self.FKSectionSubTemplate687423">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="SectionSubTemplate" EntitySet="SectionSubTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FKStudentTra257209" Association="Self.FKStudentTra257209">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="StudentTranscript" EntitySet="StudentTranscripts" />
+          </AssociationSet>
+          <AssociationSet Name="FKTranscript458878" Association="Self.FKTranscript458878">
+            <End Role="SectionSchedule" EntitySet="SectionSchedules" />
+            <End Role="TranscriptAttendaceEntry" EntitySet="TranscriptAttendaceEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FKTranscript6874222" Association="Self.FKTranscript6874222">
+            <End Role="SectionSubTemplate" EntitySet="SectionSubTemplates" />
+            <End Role="TranscriptMarkEntry" EntitySet="TranscriptMarkEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FKStudentTra94815" Association="Self.FKStudentTra94815">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentTranscript" EntitySet="StudentTranscripts" />
+          </AssociationSet>
+          <AssociationSet Name="FKTranscript584403" Association="Self.FKTranscript584403">
+            <End Role="StudentTranscript" EntitySet="StudentTranscripts" />
+            <End Role="TranscriptAttendaceEntry" EntitySet="TranscriptAttendaceEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FKTranscript687421" Association="Self.FKTranscript687421">
+            <End Role="StudentTranscript" EntitySet="StudentTranscripts" />
+            <End Role="TranscriptMarkEntry" EntitySet="TranscriptMarkEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FKSubjectTea437859" Association="Self.FKSubjectTea437859">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="SubjectTemplate" EntitySet="SubjectTemplates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="studentdataModelStoreContainer" CdmEntityContainer="studentdataEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="studentdataModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrequisiteManagers">
+            <EntityTypeMapping TypeName="studentdataModel.PrequisiteManager">
+              <MappingFragment StoreEntitySet="PrequisiteManager">
+                <ScalarProperty Name="PrequisiteID" ColumnName="PrequisiteID" />
+                <ScalarProperty Name="SubjectRepresented" ColumnName="SubjectRepresented" />
+                <ScalarProperty Name="PrequisiteSubject" ColumnName="PrequisiteSubject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Professors">
+            <EntityTypeMapping TypeName="studentdataModel.Professor">
+              <MappingFragment StoreEntitySet="Professor">
+                <ScalarProperty Name="ProfessorCode" ColumnName="ProfessorCode" />
+                <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="studentdataModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="studentdataModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="SectionNo" ColumnName="SectionNo" />
+                <ScalarProperty Name="SeatingCapacity" ColumnName="SeatingCapacity" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ProfessorCode" ColumnName="ProfessorCode" />
+                <ScalarProperty Name="RepresentedSubject" ColumnName="RepresentedSubject" />
+                <ScalarProperty Name="SemesterBelong" ColumnName="SemesterBelong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SectionSchedules">
+            <EntityTypeMapping TypeName="studentdataModel.SectionSchedule">
+              <MappingFragment StoreEntitySet="SectionSchedule">
+                <ScalarProperty Name="SectionScheduleID" ColumnName="SectionScheduleID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Slot" ColumnName="Slot" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SectionSubTemplates">
+            <EntityTypeMapping TypeName="studentdataModel.SectionSubTemplate">
+              <MappingFragment StoreEntitySet="SectionSubTemplate">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="MarkTitle" ColumnName="MarkTitle" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="studentdataModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="Major" ColumnName="Major" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentTranscripts">
+            <EntityTypeMapping TypeName="studentdataModel.StudentTranscript">
+              <MappingFragment StoreEntitySet="StudentTranscript">
+                <ScalarProperty Name="TranscriptID" ColumnName="TranscriptID" />
+                <ScalarProperty Name="StudentCode" ColumnName="StudentCode" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="AverageGrade" ColumnName="AverageGrade" />
+                <ScalarProperty Name="LearningStatus" ColumnName="LearningStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="studentdataModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubjectTemplates">
+            <EntityTypeMapping TypeName="studentdataModel.SubjectTemplate">
+              <MappingFragment StoreEntitySet="SubjectTemplate">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="MarkTitle" ColumnName="MarkTitle" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TranscriptAttendaceEntries">
+            <EntityTypeMapping TypeName="studentdataModel.TranscriptAttendaceEntry">
+              <MappingFragment StoreEntitySet="TranscriptAttendaceEntry">
+                <ScalarProperty Name="EntryID" ColumnName="EntryID" />
+                <ScalarProperty Name="TranscriptID" ColumnName="TranscriptID" />
+                <ScalarProperty Name="AttendanceStatus" ColumnName="AttendanceStatus" />
+                <ScalarProperty Name="SectionScheduleID" ColumnName="SectionScheduleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TranscriptMarkEntries">
+            <EntityTypeMapping TypeName="studentdataModel.TranscriptMarkEntry">
+              <MappingFragment StoreEntitySet="TranscriptMarkEntry">
+                <ScalarProperty Name="EntryID" ColumnName="EntryID" />
+                <ScalarProperty Name="TranscriptID" ColumnName="TranscriptID" />
+                <ScalarProperty Name="SectionTemplateID" ColumnName="SectionTemplateID" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

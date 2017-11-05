@@ -38,6 +38,16 @@ begin
 	FROM TranscriptMarkEntry tme JOIN SubjectTeamplate st ON tme.SubjectTeamplateID = st.ID
 	WHERE tme.TranscriptID = @TranscriptID
 end
+------------------
+create proc spCalculateAverageGradeByTranscriptID
+@TranscriptID int,
+@AverageGrade float output
+as
+begin
+	SELECT @AverageGrade = SUM((st.Percentage * tme.Grade))
+	FROM TranscriptMarkEntry tme JOIN SubjectTeamplate st ON tme.SectionTemplateID = st.ID
+	WHERE tme.TranscriptID = @TranscriptID
+end
 
 /* 3. tim ra top 10 sv trong hoc 1 hoc ki */
 
@@ -76,6 +86,17 @@ begin
 					Select st.SectionID from StudentTranscript st join Section sec on st.SectionID = sec.SectionNo
 							  where st.StudentCode = @StudentID and sec.SemesterBelong=6)
 							  and Date >= @FromDate and Date <= @ToDate 
+end
+/* 6. liet ke tat ca khoa hoc lay tat ca sectionID; status; credit; GPA;semesterID; semesterName; where studenID = se61769 */
+create proc spGetAllSectionOfSpecificStudent
+@StudentID nvarchar(20)
+as
+begin
+	select  * from 
+			Section sec join StudentTranscript st on sec.SectionNo = st.SectionID
+						JOIN Subject sub ON sec.RepresentedSubject = sub.SubjectCode 
+						JOIN Schedule sche ON sche.SemesterID = sec.SemesterBelong
+	where st.StudentCode = @StudentID
 end
 
 

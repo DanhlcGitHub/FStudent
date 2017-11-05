@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context="sample.fstudent.Fragment.ScheduleFragment" >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:layout_marginBottom="10dp">
+
+    <Spinner
+        android:id="@+id/weeklySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
+</LinearLayout>
+<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:layout_marginBottom="10dp">
+        <View
+            android:id="@+id/view"
+            android:layout_toRightOf="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="#000"/>
+</LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v4.view.ViewPager
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:id="@+id/paper"/>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="bottom|right">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/moveNextBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:color/transparent"
+                android:backgroundTint="@color/hotPink"/>
+
+            <TextView
+                android:id="@+id/txtCurrentViewpager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="1/2"
+                android:elevation="16dp"
+                android:textColor="@android:color/white"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </FrameLayout>
+    </FrameLayout>
+
+</LinearLayout>

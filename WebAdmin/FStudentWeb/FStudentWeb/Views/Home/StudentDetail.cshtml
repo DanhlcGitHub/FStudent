@@ -1,0 +1,48 @@
+﻿@model IEnumerable<FStudentWeb.DTO.Student>
+@using FStudentWeb.DTO;
+@{
+    ViewBag.Title = "StudentDetail";
+    Student student = ViewBag.StudentInfor;
+}
+<h2 class="w3-center">Student @student.StudentName Information</h2>
+<table class="w3-table w3-striped w3-bordered">
+    <thead>
+        <tr class="w3-theme">
+            <th>Student</th>
+            <th>Information</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+             <td>StudentID</td>
+             <td>@student.StudentID</td>
+        </tr>
+        <tr>
+             <td>Student Name</td>
+             <td>@student.StudentName</td>
+        </tr>
+        <tr>
+            <td>Major</td>
+            <td>@student.Major</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>@student.Address</td>
+        </tr>
+        <tr>
+            <td>Birthday</td>
+            <td>@student.BirthDay.ToShortDateString()</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>@student.Email</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>@student.Phone</td>
+        </tr>
+    </tbody>
+</table>
+
+
+

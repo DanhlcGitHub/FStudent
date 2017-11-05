@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="de121b001ed54f86adadb5932cad36e8" Name="Diagram1">
+        <EntityTypeShape EntityType="studentdataModel.Admin" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.PrequisiteManager" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.Professor" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.Schedule" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.Section" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.SectionSchedule" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.SectionSubTemplate" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.Student" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.StudentTranscript" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.Subject" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.SubjectTemplate" Width="1.5" PointX="3" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.TranscriptAttendaceEntry" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="studentdataModel.TranscriptMarkEntry" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+        <AssociationConnector Association="studentdataModel.FKPrequisite187664" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKPrequisite888716" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKSection711879" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKSection411369" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKSection411370" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKSectionSch330560" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKSectionSubTemplate687423" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKStudentTra257209" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKTranscript458878" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKTranscript6874222" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKStudentTra94815" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKTranscript584403" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKTranscript687421" ManuallyRouted="false" />
+        <AssociationConnector Association="studentdataModel.FKSubjectTea437859" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

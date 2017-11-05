@@ -246,8 +246,60 @@ VALUES (N'SE61770','SEC00002','Learning');
 
 INSERT INTO StudentTranscript (StudentCode,SectionID,LearningStatus)
 VALUES (N'SE61771','SEC00002','Learning');
- 
+/* SectionSubTemplate */
+INSERT INTO SectionSubTemplate (SectionID,MarkTitle,Percentage)
+VALUES (N'SEC00001','Quiz',0.3);
+
+INSERT INTO SectionSubTemplate (SectionID,MarkTitle,Percentage)
+VALUES (N'SEC00001','Assignment',0.3);
+
+INSERT INTO SectionSubTemplate (SectionID,MarkTitle,Percentage)
+VALUES (N'SEC00001','Final exam',0.4);
+
+INSERT INTO SectionSubTemplate (SectionID,MarkTitle,Percentage)
+VALUES (N'SEC00002','Quiz',0.2);
+
+INSERT INTO SectionSubTemplate (SectionID,MarkTitle,Percentage)
+VALUES (N'SEC00002','Practical',0.2);
+
+INSERT INTO SectionSubTemplate (SectionID,MarkTitle,Percentage)
+VALUES (N'SEC00002','Assignment',0.2);
+
+INSERT INTO SectionSubTemplate (SectionID,MarkTitle,Percentage)
+VALUES (N'SEC00002','Final exam',0.4);
+/* Transcript Mark Entry */
+
+INSERT INTO TranscriptMarkEntry (TranscriptID ,SectionTemplateID,Grade)
+VALUES (5,4,7);
+
+INSERT INTO TranscriptMarkEntry (TranscriptID ,SectionTemplateID,Grade)
+VALUES (5,5,8);
+
+INSERT INTO TranscriptMarkEntry (TranscriptID ,SectionTemplateID,Grade)
+VALUES (5,6,9);
+
+INSERT INTO TranscriptMarkEntry (TranscriptID ,SectionTemplateID,Grade)
+VALUES (5,7,6);
+
+INSERT INTO TranscriptMarkEntry (TranscriptID ,SectionTemplateID,Grade)
+VALUES (1,1,8);
+
+INSERT INTO TranscriptMarkEntry (TranscriptID ,SectionTemplateID,Grade)
+VALUES (1,2,9);
+
+INSERT INTO TranscriptMarkEntry (TranscriptID ,SectionTemplateID,Grade)
+VALUES (1,3,6);
 
  
+ /* addtion section */
+ INSERT INTO Section (SectionNo,SeatingCapacity , StartDate,EndDate ,ProfessorCode ,RepresentedSubject,SemesterBelong)
+VALUES (N'SEC00010',25,'2017/4/15','2017/9/15',N'PRO10001',N'PRO192',5);
 
+INSERT INTO Section (SectionNo,SeatingCapacity , StartDate,EndDate ,ProfessorCode ,RepresentedSubject,SemesterBelong)
+VALUES (N'SEC00011',25,'2017/4/15','2017/9/15',N'PRO10002',N'PRJ311',5);
 
+INSERT INTO Section (SectionNo,SeatingCapacity , StartDate,EndDate ,ProfessorCode ,RepresentedSubject,SemesterBelong)
+VALUES (N'SEC00012',25,'2017/1/15','2017/3/15',N'PRO10002',N'ISC301',4);
+
+INSERT INTO Section (SectionNo,SeatingCapacity , StartDate,EndDate ,ProfessorCode ,RepresentedSubject,SemesterBelong)
+VALUES (N'SEC00013',25,'2017/1/15','2017/3/15',N'PRO10001',N'PRJ321',4);

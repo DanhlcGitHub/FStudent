@@ -1,0 +1,44 @@
+﻿@model IEnumerable<FStudentWeb.DTO.Student>
+@using FStudentWeb.DTO;
+@{
+    ViewBag.Title = "ManageStudent";
+}
+
+<div class="w3-container">
+    <hr>
+    <div class="w3-center">
+        <h2>Manage Student</h2>
+        <p w3-class="w3-large"></p>
+    </div>
+    <div class="w3-responsive w3-card-4">
+        <table class="w3-table w3-striped w3-bordered">
+            <thead>
+                <tr class="w3-theme">
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Student Birthday</th>
+                    <th>Major</th>
+                    <th>Student CourseDetail</th>
+                    <th>Student InforDetail</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Student item in ViewBag.StudentList)
+                {
+                    <tr>
+                        <td>@item.StudentID</td>
+                        <td>@item.StudentName</td>
+                        <td>@item.BirthDay.ToShortDateString()</td>
+                        <td>@item.Major</td>
+                        <td style="text-decoration:underline; color:blue; cursor:pointer" 
+                            onclick="location.href='@Url.Action("StudentCourseDetail", "Home", new { studentID = @item.StudentID })'">Student CourseDetail</td>
+                        <td style="text-decoration: underline; color: blue; cursor: pointer"
+                            onclick="location.href='@Url.Action("StudentDetail", "Home", new {studentID= @item.StudentID })'">
+                            Student InforDetail
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+

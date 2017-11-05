@@ -1,0 +1,28 @@
+﻿@using FStudentWeb.DTO;
+@{
+    ViewBag.Title = "StudentCourseDetail";
+}
+@foreach (SemesterTranscriptModel item in ViewBag.StudentCourseInfor)
+{
+    <ul class="w3-ul w3-border">
+        <li class="w3-teal"><h3>@item.semesterName  - total credit : @item.credit - average GPA: @item.GPA</h3></li>
+        <li>
+        @foreach (SectionTranscriptModel sec in @item.sectionTranscriptModel)
+        {
+            <table class="w3-table w3-striped w3-bordered">
+                <thead>
+                    <tr>
+                        <th>@sec.sectionID - @sec.status</th>
+                        <th align="right">
+                            <span><input type="text" value="@sec.GPA" /></span>
+                            <span><button type="button">update GPA</button></span>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        }
+        </li>
+    </ul>
+}
+
+

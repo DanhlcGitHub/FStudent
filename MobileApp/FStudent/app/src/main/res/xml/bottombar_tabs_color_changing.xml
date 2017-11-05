@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_news"
+        icon="@drawable/ic_news"
+        title="News"
+        barColorWhenSelected="#7B1FA2" />
+    <tab
+        id="@+id/tab_schedule"
+        icon="@drawable/ic_schedule"
+        title="Schedule"
+        barColorWhenSelected="@color/colorAccent" />
+    <tab
+        id="@+id/tab_transcript"
+        icon="@drawable/ic_transcript"
+        title="transcript"
+        barColorWhenSelected="#5D4037" />
+    <tab
+        id="@+id/tab_profile"
+        icon="@drawable/ic_profile"
+        title="Profile"
+        barColorWhenSelected="#FF5252" />
+    <tab
+        id="@+id/tab_food"
+        icon="@drawable/ic_schedule"
+        title="Food"
+        barColorWhenSelected="#FF9800" />
+</tabs>

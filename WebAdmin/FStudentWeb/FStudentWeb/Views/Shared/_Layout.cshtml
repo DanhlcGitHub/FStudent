@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Content/js/main.js"></script>
+
+    <link rel="shortcut icon" href="~/Content/img/studenticon.png" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" name="fptstudent" content="studied">
+    <link rel="stylesheet" href="~/Content/css/w3.css">
+    <link rel="stylesheet" href="~/Content/css/w3themeorange.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- Side Navigation ***************************************-->
+    <nav class="w3-sidenav w3-white w3-card-2 w3-animate-left" style="display: none; width: 100%; text-align: center; font-size: 50px; padding-top: 10%;">
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-xxxlarge w3-text-theme">Close ×</a>
+        <a href="javascript:void(0)">Link 1</a>
+        <a href="javascript:void(0)">Link 2</a>
+        <a href="javascript:void(0)">Link 3</a>
+        <a href="javascript:void(0)">Link 4</a>
+        <a href="javascript:void(0)">Link 5</a>
+    </nav>
+
+    <!-- header******************************* -->
+    <!-- Header -->
+    <header class="w3-container w3-orange w3-padding" id="myHeader">
+        <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-opennav"></i>
+        <div class="w3-center">
+            <h4 class="w3-btn w3-xlarge w3-theme-dark">FPT ADMIN WEB SITES</h4>
+        </div>
+    </header>
+
+    <!-- dropdown*********************************************************** -->
+    <div class="w3-center">
+        <h2>Tùy Chọn</h2>
+    </div>
+
+    <div class="w3-row">
+        <!--<div class="w3-col w3-container m2 w3-red"><a href="60basickanji/index.html" target="_blank">Free Half-Day Hanoi Walking Tour</a></div>-->
+        <div style="cursor:pointer" class="w3-col w3-container m2 w3-red" onclick="location.href='@Url.Action("ManageStudent", "Home")'"><p>Manage Student</p></div>
+        <div class="w3-col w3-container m2 w3-blue"><p>###</p></div>
+        <div class="w3-col w3-container m2 w3-blue-grey"><p>###</</p></div>
+        <div class="w3-col w3-container m2 w3-teal"><p>###</p></div>
+        <div class="w3-col w3-container m2 w3-yellow"><p>###</p></div>
+        <div class="w3-col w3-container m2 w3-orange"><p>###</p></div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <!-- Footer -->
+    <footer class="w3-container w3-theme-dark w3-margin-top">
+        <hr>
+        <div class="w3-col m3 ">
+            <h4>TỰ GIỚI THIỆU</h4>
+            <p style="text-align:justify;">
+
+            <p>
+        </div>
+        <div class="w3-col m3">
+            <h4>Thông Tin Liên Lạc</h4>
+            <ul>
+                <li>Tuyển sinh: 1900.6112 hoặc 04.7106.9000</li>
+                <li>Email góp ý: daihocfpt@fpt.edu.vn</li>
+                <li>Hotline tphcm: Mr. Ba - 096.958.6685</li>
+            </ul>
+        </div>
+        <div class="w3-col m3 under">
+            <h4>Follow us</h4>
+            <img src="~/Content/img/insta.png" alt="location" width="70" height="35" style="cursor: pointer;">
+            <img src="~/Content/img/facebook.png" alt="location" width="70" height="35" style="cursor: pointer;">
+            <img src="~/Content/img/t1.png" alt="location" width="70" height="35" style="cursor: pointer;">
+            <img src="~/Content/img/youtube.png" alt="location" width="70" height="35" style="cursor: pointer;">
+        </div>
+        <h3>Helper</h3>
+        <p>
+            How can we help?&nbsp;&nbsp;<a href="w3css_references.asp" class="w3-btn w3-red">amazing</a>
+        </p><div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
+            <span class="w3-text w3-theme w3-padding">Go To Top</span>&nbsp;
+            <a class="w3-text-white" href="#myHeader">
+                <span class="w3-xlarge">
+                    <i class="fa fa-chevron-circle-up"></i>
+                </span>
+            </a>
+        </div>
+        <p></p>
+    </footer>
+
+    <!-- Script for Side Navigation -->
+    <script>
+        function w3_open() {
+            document.getElementsByClassName("w3-sidenav")[0].style.width = "100%";
+            document.getElementsByClassName("w3-sidenav")[0].style.textAlign = "center";
+            document.getElementsByClassName("w3-sidenav")[0].style.fontSize = "50px";
+            document.getElementsByClassName("w3-sidenav")[0].style.paddingTop = "10%";
+            document.getElementsByClassName("w3-sidenav")[0].style.display = "block";
+        }
+        function w3_close() {
+            document.getElementsByClassName("w3-sidenav")[0].style.display = "none";
+        }
+    </script>
+
+    <script src="/lib/w3codecolors.js"></script>
+
+    <div></div>
+    
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
