@@ -93,6 +93,8 @@
     <Content Include="Content\js\jquery-2.2.4.min.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\adminstudents - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\adminstudents - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

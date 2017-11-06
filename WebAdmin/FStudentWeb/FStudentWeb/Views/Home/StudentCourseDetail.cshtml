@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "StudentCourseDetail";
 }
+
+<input style="display:none" id="studentID" type="text" value="@ViewBag.StudentID" />
 @foreach (SemesterTranscriptModel item in ViewBag.StudentCourseInfor)
 {
     <ul class="w3-ul w3-border">
@@ -14,8 +16,8 @@
                     <tr>
                         <th>@sec.sectionID - @sec.status</th>
                         <th align="right">
-                            <span><input type="text" value="@sec.GPA" /></span>
-                            <span><button type="button">update GPA</button></span>
+                            <span><input id="grade_id" type="text" value="@sec.GPA" /></span>
+                            <span><button type="button" onclick="UpdateGrade(this,'@sec.sectionID')">update GPA</button></span>
                         </th>
                     </tr>
                 </thead>

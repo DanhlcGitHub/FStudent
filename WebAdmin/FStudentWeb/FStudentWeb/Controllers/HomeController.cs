@@ -16,11 +16,11 @@ namespace FStudentWeb.Controllers
         //string s = Request.QueryString["name"];
         public ActionResult Index()
         {
-          /*  string admin = (string)Session["login_session"];
+            string admin = (string)Session["login_session"];
             if (admin == null)
             {
                 return RedirectToAction("Login", "Home", new { area = "" });
-            }*/
+            }
             return View();
         }
 
@@ -47,6 +47,11 @@ namespace FStudentWeb.Controllers
 
         public ActionResult ManageStudent()
         {
+            string admin = (string)Session["login_session"];
+            if (admin == null)
+            {
+                return RedirectToAction("Login", "Home", new { area = "" });
+            }
             StudentDAO dao = new StudentDAO();
             List<Student> studentList = dao.GetStudentList();
             if (studentList != null && studentList.Count > 0)
@@ -65,7 +70,7 @@ namespace FStudentWeb.Controllers
 
             return View();
         }
-
+        
         public ActionResult StudentCourseDetail(string studentID)
         {
             SPDAO dao = new SPDAO();
@@ -74,5 +79,40 @@ namespace FStudentWeb.Controllers
             ViewBag.StudentID = studentID;
             return View();
         }
+
+        public ActionResult UpdateGrade(string studentID, string sectionID,string GPA)
+        {
+            bool isValid = false;
+            double GPAnum = 0;
+            bool validGrade  = double.TryParse(GPA,out GPAnum);
+            if (validGrade)
+            {
+                StudentTranscriptDAO stDAO = new StudentTranscriptDAO();
+                StudentTranscript st = stDAO.FindTranscript(studentID, sectionID);
+                if (st != null)
+                {
+                    st.AverageGrade = GPAnum;
+                    isValid = stDAO.UpdateTranscriptGrade(st.TranscriptID, st.AverageGrade);
+                }
+            }
+            else
+            {
+                isValid = false;
+            }
+            
+            var obj = new
+            {
+                valid = isValid
+            };
+            return Json(obj);
+        }
+
+        public void CheckSession()
+        {
+            string admin = (string)Session["login_session"];
+            if (admin == null)
+                RedirectToAction("Login", "Home", new { area = "" });
+        }
+
 	}
 }
