@@ -15,11 +15,11 @@
     <tbody>
         <tr>
              <td>StudentID</td>
-             <td>@student.StudentID</td>
+            <td id="studentID">@student.StudentID</td>
         </tr>
         <tr>
              <td>Student Name</td>
-             <td>@student.StudentName</td>
+             <td><input id="studentName" class="w3-input" type="text" value="@student.StudentName" ></td>
         </tr>
         <tr>
             <td>Major</td>
@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <td>Address</td>
-            <td>@student.Address</td>
+            <td><input id="studentAddress" class="w3-input" type="text" value="@student.Address" ></td>
         </tr>
         <tr>
             <td>Birthday</td>
@@ -39,10 +39,15 @@
         </tr>
         <tr>
             <td>Phone</td>
-            <td>@student.Phone</td>
+            <td><input id="studentPhone" class="w3-input" type="text" value="@student.Phone" required></td>
         </tr>
     </tbody>
 </table>
+<br />
+<div class="w3-container w3-center">
+    <button class="w3-btn" onclick="UpdateStudent()">Update</button>
+</div>
+    
 
 
 

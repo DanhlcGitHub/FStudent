@@ -37,6 +37,52 @@ function UpdateGrade(currentButton,sectionID) {
     });
 }
 
+function UpdateStudent() {
+    var studentID = document.getElementById("studentID");
+    var studentAddress = document.getElementById("studentAddress");
+    var studentPhone = document.getElementById("studentPhone");
+    var studentName = document.getElementById("studentName");
+
+    $.ajax({
+        url: 'UpdateStudent',
+        type: 'POST',
+        contentType: 'application/json;',
+        data: JSON.stringify({ studentID: studentID.textContent, studentAddress: studentAddress.value, studentPhone: studentPhone.value, studentName: studentName.value }),
+        success: function (valid) {
+            if (valid.valid) {
+                //window.location.replace("Index");
+                location.reload();
+            } else {
+                alert("Can't update!");
+            }
+        }
+    });
+}
+
+function UpdateSectionSchedule(currentButton, sectionScheduleID) {
+    //var room = currentButton.parentElement.previousElementSibling.childNodes[0].value;
+    var room = currentButton.previousElementSibling.childNodes[0].value;
+
+    var duration = currentButton.previousElementSibling.previousElementSibling.childNodes[0].value;
+    var slot = currentButton.previousElementSibling.previousElementSibling.previousElementSibling.childNodes[0].value;
+
+    $.ajax({
+        url: 'UpdateSectionSchedule',
+        type: 'POST',
+        contentType: 'application/json;',
+        data: JSON.stringify({ sectionScheduleID: sectionScheduleID, room: room, duration: duration, slot: slot }),
+        success: function (valid) {
+            if (valid.valid) {
+                //window.location.replace("Index");
+                location.reload();
+            } else {
+                alert("Can't update!");
+            }
+        }
+    });
+}
+
+
 function test() {
     alert("it's work");
 }

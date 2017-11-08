@@ -1,0 +1,36 @@
+﻿@using FStudentWeb.DTO;
+@{
+    ViewBag.Title = "View Section Schedule";
+}
+
+<div class="w3-center">
+    <h2>Schedule </h2>
+    <p w3-class="w3-large"></p>
+</div>
+<div class="w3-responsive w3-card-4">
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+            <tr class="w3-theme">
+                <th>Date</th>
+                <th>Slot</th>
+                <th>Duration</th>
+                <th>Room</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (SectionSchedule item in ViewBag.sectionScheduleList)
+            {
+                <tr>
+                    <td>@item.Date.ToShortDateString()</td>
+                    <td><input id="Slot" class="w3-input" type="number" value="@item.Slot" /></td>
+                    <td><input id="Duration" class="w3-input" type="number" value="@item.Duration" /></td>
+                    <td><input id="Room" class="w3-input" type="text" value="@item.Room" /></td>
+                    <td class="w3-btn" onclick="UpdateSectionSchedule(this,'@item.SectionScheduleID')">
+                        Update
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

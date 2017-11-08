@@ -85,6 +85,7 @@
     <Content Include="Content\img\facebook.png" />
     <Content Include="Content\img\fptlogo.jpg" />
     <Content Include="Content\img\fptlogo.png" />
+    <Content Include="Content\img\course.png" />
     <Content Include="Content\img\img_avatar2.png" />
     <Content Include="Content\img\insta.png" />
     <Content Include="Content\img\studenticon.png" />
@@ -112,6 +113,7 @@
     <Compile Include="DAO\BaseDAO.cs" />
     <Compile Include="DAO\CustomService.cs" />
     <Compile Include="DAO\SectionDAO.cs" />
+    <Compile Include="DAO\SectionScheduleDAO.cs" />
     <Compile Include="DAO\SPDAO.cs" />
     <Compile Include="DAO\StudentDAO.cs" />
     <Compile Include="DAO\StudentTranscriptDAO.cs" />
@@ -146,6 +148,8 @@
     <Content Include="Views\Home\ManageStudent.cshtml" />
     <Content Include="Views\Home\StudentDetail.cshtml" />
     <Content Include="Views\Home\StudentCourseDetail.cshtml" />
+    <Content Include="Views\Home\ManageSection.cshtml" />
+    <Content Include="Views\Home\ViewSectionSchedule.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -171,9 +171,34 @@ namespace FStudentWeb.DAO
             return row < 0 ? false : true;
         }
 
+        public bool UpdateStudent1(Student student)
+        {
+            SqlConnection con = BaseDAO.GetConnection();
+            SqlCommand cmd = new SqlCommand("Update Student set StudentName = (@StudentName) , "
+                + "Major = (@Major), Address = (@Address), Sex = (@Sex), Country = (@Country), Email = (@Email), " +
+                " BirthDay = (@BirthDay), Phone = (@Phone),Password = (@Password) where StudentID = (@StudentID)", con);
+
+            cmd.Parameters.AddWithValue("@StudentID", student.StudentID);
+            cmd.Parameters.AddWithValue("@StudentName", student.StudentName);
+            cmd.Parameters.AddWithValue("@Major", student.Major);
+            cmd.Parameters.AddWithValue("@Address", student.Address);
+            cmd.Parameters.AddWithValue("@Sex", student.Sex);
+            cmd.Parameters.AddWithValue("@Country", student.Country);
+            cmd.Parameters.AddWithValue("@Email", student.Email);
+            cmd.Parameters.AddWithValue("@BirthDay", student.BirthDay);
+            cmd.Parameters.AddWithValue("@Phone", student.Phone);
+            cmd.Parameters.AddWithValue("@Password", student.Password);
+
+            con.Open();
+            int row = -1;
+            row = cmd.ExecuteNonQuery();
+            con.Close();
+            return row < 0 ? false : true;
+        }
+
         public Student GetStudentByID(String studentID)
         {
-            Student student = new Student();
+            Student student = null;
             SqlConnection con = BaseDAO.GetConnection();
             SqlCommand cmd = new SqlCommand("Select * from Student where StudentID = (@ID)", con);
             cmd.Parameters.AddWithValue("@ID", studentID);

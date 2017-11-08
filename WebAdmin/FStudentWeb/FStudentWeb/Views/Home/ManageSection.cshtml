@@ -1,0 +1,28 @@
+﻿@using FStudentWeb.DTO;
+@{
+    ViewBag.Title = "ManageSection";
+}
+
+<div class="w3-container">
+    <h2>Section List</h2>
+    
+    <ul class="w3-ul w3-card-4">
+        
+        
+        @foreach (Section item in ViewBag.sectionList)
+        {
+            <li class="w3-bar w3-card">
+                <span class="w3-right w3-btn"
+                      onclick="location.href='@Url.Action("ViewSectionSchedule", "Home", new { sectionID = @item.SectionNo })'">view schedule</span>
+                <div class="w3-bar-item">
+                    <span class="w3-large">@item.SectionNo</span><br>
+                    <span>@item.RepresentedSubject</span>
+                </div>
+            </li>
+        }
+
+    </ul>
+
+
+</div>
+
