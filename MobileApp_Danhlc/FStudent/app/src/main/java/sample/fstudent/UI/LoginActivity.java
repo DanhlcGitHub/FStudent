@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class LoginActivity extends AppCompatActivity implements StudentReceiver.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
@@ -54,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements StudentReceiver.
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //Intent k = new Intent(LoginActivity.this, HomeActivity.class);
                 //startActivity(k);
                 //login();

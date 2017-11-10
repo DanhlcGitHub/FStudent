@@ -2,7 +2,9 @@
 using FStudentWeb.DTO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -47,6 +49,7 @@ namespace FStudentWeb.Controllers
 
         public ActionResult ManageStudent()
         {
+
             string admin = (string)Session["login_session"];
             if (admin == null)
             {
@@ -132,6 +135,11 @@ namespace FStudentWeb.Controllers
 
         public ActionResult ManageSection()
         {
+            string admin = (string)Session["login_session"];
+            if (admin == null)
+            {
+                return RedirectToAction("Login", "Home", new { area = "" });
+            }
             SectionDAO dao = new SectionDAO();
             List<Section> sectionList = dao.GetSectionList();
             if (sectionList != null && sectionList.Count > 0)
@@ -173,6 +181,8 @@ namespace FStudentWeb.Controllers
                     sectionSchedule.Slot = slotNum;
                     dao.UpdateSectionSchedule(sectionSchedule);
                     isValid = true;
+                    string content = sectionSchedule.SectionID + " changed room " + room + " | slot: " + slot;
+                    SendMessage(content);
                 }
             }
             var obj = new
@@ -180,6 +190,41 @@ namespace FStudentWeb.Controllers
                 valid = isValid
             };
             return Json(obj);
+        }
+
+        private void SendMessage(string content)
+        {
+            string serverKey = "AIzaSyB049detSV0BLjmsDM32cma3h0fY2s1cSw";
+            string mainToken = "cQdiow0g480:APA91bHz6PO0GzXvnI360GEr2m7nIAh1DWqP9spWRc_bb1WRhjMAeBtD8N1Wz5F_fQzCtex35XSllghnNggVFYgryf5ui8tvicdaw33FcocagaWVWXocuuRfg_ORpxuFkMCqJyGb9Rnz";
+            try
+            {
+                var result = "-1";
+                var webAddr = "https://fcm.googleapis.com/fcm/send";
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(webAddr);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Authorization:key=" + serverKey);
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = "{\"to\": \" " + mainToken + "\",\"data\": {\"message\": \"" + content + "\",}}";
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                // return result;
+            }
+            catch (Exception ex)
+            {
+                //  Response.Write(ex.Message);
+            }
         }
 
         public void CheckSession()

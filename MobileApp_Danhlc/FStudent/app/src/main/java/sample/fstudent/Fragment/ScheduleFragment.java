@@ -230,6 +230,7 @@ public class ScheduleFragment extends Fragment implements StudentReceiver.Receiv
     }
 
     public void callGetWeeklyService(){
+
         mReceiver = new StudentReceiver(new Handler());
         mReceiver.setReceiver(this);
 

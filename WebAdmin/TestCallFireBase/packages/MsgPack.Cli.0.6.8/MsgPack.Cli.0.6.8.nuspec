@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>MsgPack.Cli</id>
+    <version>0.6.8</version>
+    <title>MessagePack for CLI</title>
+    <authors>FUJIWARA, Yusuke</authors>
+    <owners>FUJIWARA, Yusuke</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/msgpack/msgpack-cli</projectUrl>
+    <iconUrl>http://cli.msgpack.org/images/msgpack.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MessagePack is fast, compact, and interoperable binary serialization format.
+This package provides MessagePack serialization/deserialization APIs. This pacakge also supports Mono, Xamarin and Unity3D.</description>
+    <releaseNotes>This release contains bug fixes.</releaseNotes>
+    <copyright>Copyright 2010-2016 FUJIWARA, Yusuke, all rights reserved.</copyright>
+    <tags>MsgPack MessagePack Serialization Formatter Binary Serializer Fast Xamarin Unity3D</tags>
+  </metadata>
+</package>
